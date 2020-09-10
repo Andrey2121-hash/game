@@ -26,7 +26,13 @@ let score = document.querySelector('.score'),
  };
 
   function startGame(){
+    
     start.classList.add('hide');
+    gameArea.innerHTML = '';
+    car.style.left = '100px';
+    car.style.top ='auto'
+    car.style.bottom = '10px';
+   
     for (let i = 0; i < 12; i++){
         const line = document.createElement('div');
         line.classList.add('line');
@@ -44,6 +50,7 @@ let score = document.querySelector('.score'),
         enemy.style.background = 'transparent url("./img/enemy.png") center / cover no-repeat';
         gameArea.appendChild(enemy)
     }
+    setting.score = 0
     setting.start = true;
     gameArea.appendChild(car);
     setting.x =car.offsetLeft;
@@ -53,6 +60,8 @@ let score = document.querySelector('.score'),
   };
   function playGame(){
       if (setting.start){
+          setting.score += setting.speed
+          score.textContent= 'SCORE'+ setting.score
           moveRoad();
           moveEnemy();
 
@@ -101,6 +110,17 @@ function moveRoad (){
 function moveEnemy(){
     let enemy =document.querySelectorAll('.enemy');
     enemy.forEach(function(item1){
+        let carRect = car.getBoundingClientRect();
+        let enemyRect =item1.getBoundingClientRect();
+        if(carRect.top <= enemyRect.bottom
+            && carRect.right>= enemyRect.left 
+            && carRect.left <= enemyRect.right
+            && carRect.bottom>= enemyRect.top){
+            setting.start =  false
+            start.classList.remove('hide')
+            start.style.top = score.offsetHeight ;
+        }
+      
         item1.y +=  setting.speed / 2;
         item1.style.top = item1.y +'px';
         if(item1.y > document.documentElement.clientHeight){
