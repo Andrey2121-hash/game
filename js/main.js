@@ -95,7 +95,7 @@ function moveRoad (){
             item.y = -75
         }
 
-console.log(item)
+
     })
 }
 function moveEnemy(){
