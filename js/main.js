@@ -41,7 +41,7 @@ let score = document.querySelector('.score'),
         enemy.style.left = Math.floor(Math.random() * gameArea.offsetWidth)+ 'px';
        
         enemy.style.top= enemy.y +'px ';
-        enemy.style.background = 'transparent url("../img/enemy.png") center / cover no-repeat'
+        enemy.style.background = 'transparent url("./img/enemy.png") center / cover no-repeat';
         gameArea.appendChild(enemy)
     }
     setting.start = true;
